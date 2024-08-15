@@ -9,13 +9,17 @@ typedef struct Node
     struct Node *prev;
 } Node;
 
-Node *initList(int data)
+typedef struct DoublyLinkedList
 {
-    Node *head = (Node *)malloc(sizeof(Node));
-    head->data = data;
-    head->next = NULL;
-    head->prev = NULL;
-    return head;
+    Node *head;
+    Node *tail;
+} DoublyLinkedList;
+
+DoublyLinkedList *initList()
+{
+    DoublyLinkedList *list = (DoublyLinkedList *)malloc(sizeof(DoublyLinkedList));
+    *list = {NULL, NULL};
+    return list;
 }
 
 Node *getLast(Node *node)
@@ -27,108 +31,111 @@ Node *getLast(Node *node)
     return node;
 }
 
-void printList(Node *node)
+void printList(DoublyLinkedList *list)
 {
-    while (node != NULL)
+    Node *aux = list->head;
+
+    while (aux->next != NULL)
     {
-        cout << node->data << " ";
-        node = node->next;
+        cout << aux->data << " ";
+        aux = aux->next;
     }
+
     cout << endl;
 }
 
-// insert a node at the end of the list
-void unshift(Node **head, int data)
+// insert a node at the start of the list
+void unshift(DoublyLinkedList *list, int data)
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->data = data;
-    newNode->next = *head;
+    newNode->next = list->head;
     newNode->prev = NULL;
 
-    if (*head != NULL)
+    if (list->head != NULL)
     {
-        (*head)->prev = newNode;
+        (list->head)->prev = newNode;
     }
 
-    *head = newNode;
+    list->head = newNode;
 }
 
 // remove the first node of the list
-void shift(Node **head)
+void shift(DoublyLinkedList *list)
 {
-    if (*head == NULL)
+    if (list->head == NULL)
     {
         return;
     }
 
-    Node *temp = *head;
-    *head = (*head)->next;
+    Node *temp = list->head;
+    list->head = (list->head)->next;
 
-    if (*head != NULL)
+    if (list->head != NULL)
     {
-        (*head)->prev = NULL;
+        (list->head)->prev = NULL;
     }
 
     free(temp);
 }
 
 // insert a node at the end of the list
-void push(Node **head, int data)
+void push(DoublyLinkedList *list, int data)
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = NULL;
 
-    if (*head == NULL)
+    if (list->head == NULL)
     {
         newNode->prev = NULL;
-        *head = newNode;
+        list->head = newNode;
         return;
     }
 
-    Node *last = getLast(*head);
+    Node *last = getLast(list->head);
     last->next = newNode;
     newNode->prev = last;
 }
 
 // remove the last node of the list
-void pop(Node **head)
+void pop(DoublyLinkedList *list)
 {
-    if (*head == NULL)
+    if (list->head == NULL)
     {
         return;
     }
 
-    if ((*head)->next == NULL)
+    if ((list->head)->next == NULL)
     {
-        free(*head);
-        *head = NULL;
+        free(list->head);
+        list->head = NULL;
         return;
     }
 
-    Node *last = getLast(*head);
+    Node *last = getLast(list->head);
     last->prev->next = NULL;
     free(last);
 }
 
 int main()
 {
-    Node *head = initList(2);
+    DoublyLinkedList *list = initList();
 
-    unshift(&head, 10);
-    printList(head);
+    unshift(list, 10);
+    printList(list);
 
-    unshift(&head, 20);
-    printList(head);
+    unshift(list, 20);
+    printList(list);
 
-    push(&head, 30);
-    printList(head);
+    push(list, 30);
+    printList(list);
 
-    pop(&head);
-    printList(head);
+    pop(list);
+    printList(list);
 
-    shift(&head);
-    printList(head);
+    shift(list);
+    printList(list);
 
     return 0;
 }
