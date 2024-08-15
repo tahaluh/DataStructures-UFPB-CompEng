@@ -5,9 +5,12 @@
       "label": "C/C++: g++.exe build active file",
       "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
       "args": [
+        "-I${workspaceFolder}\\utils",
         "-fdiagnostics-color=always",
         "-g",
         "${file}",
+        // include utils on the root folder
+        "${workspaceFolder}\\utils\\utils.cpp",
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe"
       ],
