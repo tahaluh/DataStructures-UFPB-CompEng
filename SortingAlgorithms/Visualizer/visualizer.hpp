@@ -13,10 +13,10 @@ class Visualizer
 public:
     Visualizer(int width, int height, int fps, const std::string &title, int min, int max, int *arr, int n);
 
-    void renderArray(int *arr, int n);
+    void renderArray(int *arr, int n, sf::Color color);
     void renderCompare(int *arr, int indexA, int indexB);
     void renderSwap(int *arr, int indexA, int indexB);
-    void renderSorted(int *arr, int n);
+    void renderSortedAnimation(int *arr, int n);
     bool isSorted(int *arr, int n);
 
     void tick();

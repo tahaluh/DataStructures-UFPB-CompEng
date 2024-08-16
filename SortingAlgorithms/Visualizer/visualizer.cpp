@@ -13,13 +13,13 @@ sf::RenderWindow &Visualizer::getWindow()
     return this->window;
 }
 
-void Visualizer::renderArray(int *arr, int n)
+void Visualizer::renderArray(int *arr, int n, sf::Color color = sf::Color::White)
 {
     window.clear();
 
     for (int i = 0; i < n; i++)
     {
-        this->renderBar(arr[i], i, sf::Color::White);
+        this->renderBar(arr[i], i, color);
     }
 
     window.display();
@@ -88,12 +88,20 @@ void Visualizer::run(Sorting sorting)
 
     if (this->isSorted(arr, n))
     {
-        this->renderSorted(arr, n);
+        this->renderSortedAnimation(arr, n);
     }
 
     while (window.isOpen())
     {
-        tick();
+        window.clear();
+        this->renderArray(arr, n, sf::Color::Green);
+        window.display();
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
     }
 }
 
@@ -114,7 +122,7 @@ int Visualizer::getBarHeight(int barHeight)
     return mappedHeight;
 }
 
-void Visualizer::renderSorted(int *arr, int n)
+void Visualizer::renderSortedAnimation(int *arr, int n)
 {
     this->renderArray(arr, n);
 
@@ -126,6 +134,11 @@ void Visualizer::renderSorted(int *arr, int n)
 
         sf::sleep(sf::milliseconds(3));
     }
+}
+
+void Visualizer::close()
+{
+    this->window.close();
 }
 
 bool Visualizer::isSorted(int *arr, int n)
