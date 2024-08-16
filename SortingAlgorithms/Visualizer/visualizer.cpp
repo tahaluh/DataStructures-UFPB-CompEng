@@ -61,8 +61,12 @@ void Visualizer::tick()
     sf::Event event;
     while (window.pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
+        if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q)
+        {
             window.close();
+            // end program
+            exit(0);
+        }
     }
 
     // sleep for 100 ms
@@ -96,12 +100,7 @@ void Visualizer::run(Sorting sorting)
         window.clear();
         this->renderArray(arr, n, sf::Color::Green);
         window.display();
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        this->tick();
     }
 }
 

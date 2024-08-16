@@ -9,8 +9,8 @@ void menu()
     std::cout << "------ Sorting Algorithms Menu ------" << std::endl;
     std::cout << "1 - Bubble Sort" << std::endl;
     std::cout << "2 - Insertion Sort" << std::endl;
-    std::cout << "4 - Selection Sort" << std::endl;
-    std::cout << "3 - Quick Sort" << std::endl;
+    std::cout << "3 - Selection Sort" << std::endl;
+    std::cout << "4 - Quick Sort" << std::endl;
     std::cout << "5 - Merge Sort" << std::endl;
     std::cout << "-------------------------------------" << std::endl;
     std::cout << "Please select an option (1-5): " << std::endl;
@@ -61,8 +61,6 @@ int main()
     sortOption selectedOption = options[option - 1];
 
     Visualizer visualizer(width, height, fps, selectedOption.name + " Visualizer", min, max, arr, n);
-    sf::RenderWindow &window = visualizer.getWindow();
-
     visualizer.run(selectedOption.sorting);
 
     return EXIT_SUCCESS;
