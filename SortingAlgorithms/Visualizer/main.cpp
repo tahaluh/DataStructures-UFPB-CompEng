@@ -4,6 +4,31 @@
 #include "../Utils/utils.hpp"
 #include "../sorts.hpp"
 
+void menu()
+{
+    std::cout << "------ Sorting Algorithms Menu ------" << std::endl;
+    std::cout << "1 - Bubble Sort" << std::endl;
+    std::cout << "2 - Insertion Sort" << std::endl;
+    std::cout << "3 - Quick Sort" << std::endl;
+    std::cout << "4 - Selection Sort" << std::endl;
+    std::cout << "-------------------------------------" << std::endl;
+    std::cout << "Please select an option (1-5): " << std::endl;
+}
+
+int getSort()
+{
+    int option;
+    while (1)
+    {
+        menu();
+        std::cin >> option;
+        if (option >= 1 && option <= 4) break;
+        else std::cout << "Invalid option" << std::endl;
+    }
+
+    return option;
+}
+
 int main()
 {
     int n = 150;
@@ -16,10 +41,22 @@ int main()
     int fps = 500;
     int *arr = createArray(n, min, max, seed);
 
-    Visualizer visualizer(width, height, fps, "Sorting Algorithms Visualizer", min, max, arr, n);
+    int option = getSort();
+    std::string name;
+
+    if (option == 1) name = "Bubble Sort";
+    else if (option == 2) name = "Insertion Sort";
+    else if (option == 3) name = "Quick Sort";
+    else if (option == 4) name = "Selection Sort";
+    
+    Visualizer visualizer(width, height, fps, name + " Visualizer", min, max, arr, n);
     sf::RenderWindow &window = visualizer.getWindow();
 
-    visualizer.run(quickSort);
+    if (option == 1) visualizer.run(bubbleSort);
+    else if (option == 2) visualizer.run(insertionSort);
+    else if (option == 3) visualizer.run(quickSort);
+    else if (option == 4) visualizer.run(selectionSort);
+
     window.display();
 
     while (window.isOpen())

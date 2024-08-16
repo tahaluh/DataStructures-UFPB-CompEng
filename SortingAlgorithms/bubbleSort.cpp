@@ -12,7 +12,7 @@ using namespace std;
 
 // move the biggest element to the end of the array in each iteration
 
-void bubleSort(int *arr, int n, ArrayProcessor arrayProcessor = nullptr, SwapProcessor swapProcessor = nullptr, CompareProcessor compareProcessor = nullptr)
+void bubbleSort(int *arr, int n, ArrayProcessor arrayProcessor = nullptr, SwapProcessor swapProcessor = nullptr, CompareProcessor compareProcessor = nullptr)
 {
     for (int i = 0; i < n - 1; i++)
     {
