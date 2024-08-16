@@ -16,6 +16,8 @@ public:
     void renderArray(int *arr, int n);
     void renderCompare(int *arr, int indexA, int indexB);
     void renderSwap(int *arr, int indexA, int indexB);
+    void renderSorted(int *arr, int n);
+    bool isSorted(int *arr, int n);
 
     void tick();
 
