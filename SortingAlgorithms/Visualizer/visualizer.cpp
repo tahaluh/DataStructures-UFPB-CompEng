@@ -19,12 +19,7 @@ void Visualizer::renderArray(int *arr, int n)
 
     for (int i = 0; i < n; i++)
     {
-        int barWidth = window.getSize().x / n;
-        int barHeight = mapToRange(arr[i], min, max, 0, window.getSize().y);
-        sf::RectangleShape rectangle(sf::Vector2f(barWidth, barHeight));
-        rectangle.setPosition(i * barWidth, window.getSize().y - barHeight);
-
-        window.draw(rectangle);
+        this->renderBar(arr[i], i, sf::Color::White);
     }
 
     window.display();
@@ -32,10 +27,10 @@ void Visualizer::renderArray(int *arr, int n)
 
 void Visualizer::renderBar(int height, int index, sf::Color color)
 {
-    int barWidth = window.getSize().x / n;
-    int barHeight = mapToRange(height, min, max, 0, window.getSize().y);
+    int barWidth = this->getBarWidth();
+    int barHeight = this->getBarHeight(height);
     sf::RectangleShape rectangle(sf::Vector2f(barWidth, barHeight));
-    rectangle.setPosition(index * barWidth, window.getSize().y - barHeight);
+    rectangle.setPosition(index * barWidth, this->height - barHeight);
     rectangle.setFillColor(color);
 
     window.draw(rectangle);
@@ -74,7 +69,37 @@ void Visualizer::tick()
     // sf::sleep(sf::milliseconds(2));
 }
 
-int Visualizer::mapToRange(int value, int min, int max, int newMin, int newMax)
+void Visualizer::run(Sorting sorting)
 {
-    return (value - min) * (newMax - newMin) / (max - min) + newMin;
+    sorting(
+        arr, n,
+        [this](int *arr, int n)
+        {
+            this->renderArray(arr, n);
+        },
+        [this](int *arr, int indexA, int indexB)
+        {
+            this->renderSwap(arr, indexA, indexB);
+        },
+        [this](int *arr, int indexA, int indexB)
+        {
+            this->renderCompare(arr, indexA, indexB);
+        });
+}
+
+int Visualizer::getBarWidth()
+{
+    return this->width / this->n;
+}
+
+int Visualizer::getBarHeight(int barHeight)
+{
+    int value = barHeight;
+
+    int minOut = 1;
+    int maxOut = this->height;
+
+    int mappedHeight = minOut + (value - this->min) * (maxOut - minOut) / (this->max - this->min);
+
+    return mappedHeight;
 }

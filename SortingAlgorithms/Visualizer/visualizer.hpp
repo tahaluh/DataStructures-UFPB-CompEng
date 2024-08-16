@@ -4,8 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <functional>
+#include "../Utils/utils.hpp"
 
-using ArrayProcessor = std::function<void(int *, int)>;
+using Sorting = std::function<void(int *, int, ArrayProcessor, SwapProcessor, CompareProcessor)>;
 
 class Visualizer
 {
@@ -19,13 +20,14 @@ public:
     void tick();
 
     void close();
-    void run(ArrayProcessor arrayProcessor);
+    void run(Sorting sorting);
 
     sf::RenderWindow &getWindow();
 
 private:
     void renderBar(int height, int index, sf::Color color);
-    int mapToRange(int value, int min, int max, int newMin, int newMax);
+    int getBarWidth();
+    int getBarHeight(int height);
     sf::RenderWindow window;
     int width;
     int height;
