@@ -1,34 +1,31 @@
 #include <iostream>
 #include <functional>
-
-using ArrayProcessor = std::function<void(int *, int)>;
-using SwapProcessor = std::function<void(int, int)>;
-using CompareProcessor = std::function<void(int, int)>;
+#include "utils.hpp"
 
 using namespace std;
 
-void swap(int *a, int *b, SwapProcessor swapProcessor = nullptr)
+void swap(int *arr, int a, int b, SwapProcessor *swapProcessor = nullptr)
 {
     if (swapProcessor)
     {
-        swapProcessor(*a, *b);
+        (*swapProcessor)(arr, a, b);
     }
-    int aux = *a;
-    *a = *b;
-    *b = aux;
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
 }
 
-int compare(int a, int b, CompareProcessor compareProcessor = nullptr)
+int compare(int *arr, int a, int b, CompareProcessor *compareProcessor = nullptr)
 {
     if (compareProcessor)
     {
-        compareProcessor(a, b);
+        (*compareProcessor)(arr, a, b);
     }
-    if (a > b)
+    if (arr[a] > arr[b])
     {
         return 1;
     }
-    if (a < b)
+    if (arr[a] < arr[b])
     {
         return -1;
     }

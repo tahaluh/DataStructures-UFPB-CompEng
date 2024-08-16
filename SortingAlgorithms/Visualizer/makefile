@@ -3,7 +3,7 @@
 TARGET = visualizer
 
 # source files
-SRCS = main.cpp visualizer.cpp ../Utils/utils.cpp
+SRCS = main.cpp visualizer.cpp ../Utils/utils.cpp ../bubleSort.cpp
 
 # compiler
 CXX = g++
@@ -23,7 +23,7 @@ all: $(TARGET)
 # 
 $(TARGET): $(SRCS)
 	$(CXX) -o $(TARGET) $(SRCS) $(CXXFLAGS) $(LDFLAGS) $(LIBS)
-#	./$(TARGET)
+	./$(TARGET)
 
 # clean
 clean:
