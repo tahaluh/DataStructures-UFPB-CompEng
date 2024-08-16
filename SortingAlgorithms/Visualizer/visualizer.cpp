@@ -91,7 +91,6 @@ void Visualizer::run(Sorting sorting)
         this->renderSorted(arr, n);
     }
 
-
     while (window.isOpen())
     {
         tick();
@@ -115,8 +114,8 @@ int Visualizer::getBarHeight(int barHeight)
     return mappedHeight;
 }
 
-void Visualizer::renderSorted(int *arr, int n) 
-{    
+void Visualizer::renderSorted(int *arr, int n)
+{
     this->renderArray(arr, n);
 
     for (int i = 0; i < n; i++)
@@ -125,7 +124,7 @@ void Visualizer::renderSorted(int *arr, int n)
 
         window.display();
 
-        sf::sleep(sf::milliseconds(50));
+        sf::sleep(sf::milliseconds(3));
     }
 }
 

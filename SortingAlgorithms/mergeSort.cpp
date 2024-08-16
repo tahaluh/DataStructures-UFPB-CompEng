@@ -1,84 +1,57 @@
-#include <iostream>
-#include <time.h>
-
+#include <stdio.h>
 #include "./Utils/utils.hpp"
 
-using namespace std;
+// implementation of void mergeSort(int *arr, int n)
 
-// merge sort algorithm
-// Time complexity: O(n log n)
-
-// merge two sorted arrays
-void mergeSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+void recursiveMergeSort(int *arr, int n, int realIndexStart, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
 {
     if (n > 1)
     {
+        int *originalArr = arr - realIndexStart;
         int mid = n / 2;
-        int *left = (int *)malloc(mid * sizeof(int));
-        int *right = (int *)malloc((n - mid) * sizeof(int));
+        int *left = arr;
+        int *right = arr + mid;
 
-        for (int i = 0; i < mid; i++)
-        {
-            left[i] = arr[i];
-        }
-        for (int i = mid; i < n; i++)
-        {
-            right[i - mid] = arr[i];
-        }
-
-        mergeSort(left, mid);
-        mergeSort(right, n - mid);
+        recursiveMergeSort(left, mid, realIndexStart, arrayProcessor, swapProcessor, compareProcessor);
+        recursiveMergeSort(right, n - mid, realIndexStart + mid, arrayProcessor, swapProcessor, compareProcessor);
 
         int i = 0, j = 0, k = 0;
+        int *temp = new int[n];
+
         while (i < mid && j < n - mid)
         {
-            if (left[i] < right[j])
+            //
+            if (compare(originalArr, i + realIndexStart, j + realIndexStart + mid, &compareProcessor) <= 0)
             {
-                arr[k] = left[i];
-                i++;
+                temp[k++] = left[i++];
             }
             else
             {
-                arr[k] = right[j];
-                j++;
+                temp[k++] = right[j++];
             }
-            k++;
         }
 
         while (i < mid)
         {
-            arr[k] = left[i];
-            i++;
-            k++;
+            temp[k++] = left[i++];
         }
 
         while (j < n - mid)
         {
-            arr[k] = right[j];
-            j++;
-            k++;
+            temp[k++] = right[j++];
         }
 
-        free(left);
-        free(right);
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = temp[i];
+            swap(originalArr, i + realIndexStart, i + realIndexStart, &swapProcessor);
+        }
+
+        delete[] temp;
     }
 }
 
-/*
-int main()
+void mergeSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
 {
-    int n = 100000;
-    int nToPrint = 20;
-    clock_t start, end;
-
-    int *arr = createArray(n, 1, 100, 42);
-    printArray(arr, nToPrint);
-
-    start = clock();
-    mergeSort(arr, n);
-    end = clock();
-
-    printArray(arr, nToPrint);
-    printTimeSpent(start, end);
+    recursiveMergeSort(arr, n, 0, arrayProcessor, swapProcessor, compareProcessor);
 }
-*/
