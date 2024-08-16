@@ -15,6 +15,12 @@ void menu()
     std::cout << "Please select an option (1-5): " << std::endl;
 }
 
+typedef struct sortOption
+{
+    std::string name;
+    Sorting sorting;
+} sortOption;
+
 int getSort()
 {
     int option;
@@ -22,8 +28,10 @@ int getSort()
     {
         menu();
         std::cin >> option;
-        if (option >= 1 && option <= 4) break;
-        else std::cout << "Invalid option" << std::endl;
+        if (option >= 1 && option <= 4)
+            break;
+        else
+            std::cout << "Invalid option" << std::endl;
     }
 
     return option;
@@ -31,6 +39,12 @@ int getSort()
 
 int main()
 {
+    sortOption options[] = {
+        {"Bubble Sort", bubbleSort},
+        {"Insertion Sort", insertionSort},
+        {"Quick Sort", quickSort},
+        {"Selection Sort", selectionSort}};
+
     int n = 150;
     int min = 1;
     int max = 100;
@@ -42,20 +56,12 @@ int main()
     int *arr = createArray(n, min, max, seed);
 
     int option = getSort();
-    std::string name;
+    sortOption selectedOption = options[option - 1];
 
-    if (option == 1) name = "Bubble Sort";
-    else if (option == 2) name = "Insertion Sort";
-    else if (option == 3) name = "Quick Sort";
-    else if (option == 4) name = "Selection Sort";
-    
-    Visualizer visualizer(width, height, fps, name + " Visualizer", min, max, arr, n);
+    Visualizer visualizer(width, height, fps, selectedOption.name + " Visualizer", min, max, arr, n);
     sf::RenderWindow &window = visualizer.getWindow();
 
-    if (option == 1) visualizer.run(bubbleSort);
-    else if (option == 2) visualizer.run(insertionSort);
-    else if (option == 3) visualizer.run(quickSort);
-    else if (option == 4) visualizer.run(selectionSort);
+    visualizer.run(selectedOption.sorting);
 
     window.display();
 
