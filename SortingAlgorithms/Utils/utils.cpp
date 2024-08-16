@@ -32,6 +32,27 @@ int compare(int *arr, int a, int b, CompareProcessor *compareProcessor = nullptr
     return 0;
 }
 
+// create a array from min to max with n elements without repetition, using seed to shuffle
+
+int *createArray(int n, int min, int max, int seed)
+{
+    int *arr = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = (i + 1) % max;
+    }
+
+    srand(seed);
+    for (int i = 0; i < n; i++)
+    {
+        int j = rand() % n;
+        swap(arr, i, j);
+    }
+
+    return arr;
+}
+
+/*
 int *createArray(int n, int min, int max, int seed)
 {
     int *arr = (int *)malloc(n * sizeof(int));
@@ -42,6 +63,7 @@ int *createArray(int n, int min, int max, int seed)
     }
     return arr;
 }
+*/
 
 void printArray(int *arr, int n)
 {

@@ -47,12 +47,12 @@ int main()
 
     int n = 150;
     int min = 1;
-    int max = 100;
+    int max = n;
     int seed = 42;
     int width = 1200;
     int height = 900;
 
-    int fps = 500;
+    int fps = 144;
     int *arr = createArray(n, min, max, seed);
 
     int option = getSort();
