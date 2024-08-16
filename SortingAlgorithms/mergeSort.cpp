@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
 
-#include "./Utils/utils.h"
+#include "./Utils/utils.hpp"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ using namespace std;
 // Time complexity: O(n log n)
 
 // merge two sorted arrays
-void mergeSort(int *arr, int n)
+void mergeSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
 {
     if (n > 1)
     {
