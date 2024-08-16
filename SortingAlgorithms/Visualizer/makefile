@@ -3,7 +3,7 @@
 TARGET = visualizer
 
 # source files
-SRCS = main.cpp visualizer.cpp ../Utils/utils.cpp ../bubleSort.cpp ../insertionSort.cpp ../quickSort.cpp
+SRCS = main.cpp visualizer.cpp ../Utils/utils.cpp ../bubleSort.cpp ../insertionSort.cpp ../quickSort.cpp ../selectionSort.cpp
 
 # compiler
 CXX = g++

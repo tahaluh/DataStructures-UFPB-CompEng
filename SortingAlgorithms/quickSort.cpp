@@ -19,7 +19,6 @@ int partition(int arr[], int low, int high, ArrayProcessor arrayProcessor, SwapP
         if (compare(arr, j, high, &compareProcessor) == -1)
         {
             i++;
-            // swap(arr, swapIndex, swapIndex - 1, &swapProcessor);
             swap(arr, i, j, &swapProcessor);
         }
     }

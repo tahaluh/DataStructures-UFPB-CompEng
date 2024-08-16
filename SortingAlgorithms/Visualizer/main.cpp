@@ -18,7 +18,7 @@ int main()
 
     while (window.isOpen())
     {
-        visualizer.run(quickSort);
+        visualizer.run(selectionSort);
         window.display();
 
         sf::sleep(sf::seconds(5));
