@@ -2,7 +2,7 @@
 #include <iostream>
 #include "visualizer.hpp"
 #include "../Utils/utils.hpp"
-#include "../bubleSort.hpp"
+#include "../sorts.hpp"
 
 int main()
 {
