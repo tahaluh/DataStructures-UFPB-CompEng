@@ -5,7 +5,8 @@
 Visualizer::Visualizer(int width, int height, int fps, const std::string &title, int min = 1, int max = 100, int *arr = nullptr, int n = 0)
     : window(sf::VideoMode(width, height), title), width(width), height(height), fps(fps), title(title), running(true), min(min), max(max), n(n), arr(arr)
 {
-    window.setFramerateLimit(fps);
+    window.setFramerateLimit(0);
+    window.setVerticalSyncEnabled(false);
 }
 
 sf::RenderWindow &Visualizer::getWindow()
@@ -15,14 +16,10 @@ sf::RenderWindow &Visualizer::getWindow()
 
 void Visualizer::renderArray(int *arr, int n)
 {
-    window.clear();
-
     for (int i = 0; i < n; i++)
     {
         this->renderBar(arr[i], i, sf::Color::White);
     }
-
-    window.display();
 }
 
 void Visualizer::renderBar(int height, int index, sf::Color color)
@@ -65,8 +62,7 @@ void Visualizer::tick()
             window.close();
     }
 
-    // sleep for 100 ms
-    // sf::sleep(sf::milliseconds(2));
+    // sf::sleep(sf::milliseconds(1000 / this->fps));
 }
 
 void Visualizer::run(Sorting sorting)
@@ -85,6 +81,11 @@ void Visualizer::run(Sorting sorting)
         {
             this->renderCompare(arr, indexA, indexB);
         });
+
+    this->window.clear();
+    this->renderArray(arr, n);
+
+    // render test
 }
 
 int Visualizer::getBarWidth()
