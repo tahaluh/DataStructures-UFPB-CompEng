@@ -19,13 +19,17 @@ int main()
     Visualizer visualizer(width, height, fps, "Sorting Algorithms Visualizer", min, max, arr, n);
     sf::RenderWindow &window = visualizer.getWindow();
 
+    visualizer.run(quickSort);
+    window.display();
+
     while (window.isOpen())
     {
-        visualizer.run(insertionSort);
-        window.display();
-
-        sf::sleep(sf::seconds(5));
-        window.close();
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
     }
 
     return EXIT_SUCCESS;
