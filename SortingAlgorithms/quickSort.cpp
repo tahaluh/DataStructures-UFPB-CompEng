@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
 
-#include "../Utils/utils.h"
+#include "./Utils/utils.h"
 
 using namespace std;
 
@@ -40,6 +40,7 @@ void quickSort(int *arr, int n)
     quickSort(&arr[i], n - i);
 }
 
+/*
 int main()
 {
     int n = 10000000;
@@ -56,3 +57,4 @@ int main()
     printArray(arr, nToPrint);
     printTimeSpent(start, end);
 }
+*/

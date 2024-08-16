@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
 
-#include "../Utils/utils.h"
+#include "./Utils/utils.h"
 
 using namespace std;
 
@@ -23,6 +23,7 @@ void insertionSort(int *arr, int n)
     }
 }
 
+/*
 int main()
 {
     int n = 100000;
@@ -39,3 +40,4 @@ int main()
     printArray(arr, nToPrint);
     printTimeSpent(start, end);
 }
+*/
