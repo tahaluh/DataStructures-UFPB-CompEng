@@ -13,12 +13,12 @@ int main()
     clock_t start, end;
     int *arr = createArray(n, min, max, seed);
 
-    Visualizer visualizer(1200, 900, 1000, "Sorting Algorithms Visualizer", min, max, arr, n);
+    Visualizer visualizer(1200, 900, 500, "Sorting Algorithms Visualizer", min, max, arr, n);
     sf::RenderWindow &window = visualizer.getWindow();
 
     while (window.isOpen())
     {
-        visualizer.run(insertionSort);
+        visualizer.run(quickSort);
         window.display();
 
         sf::sleep(sf::seconds(5));

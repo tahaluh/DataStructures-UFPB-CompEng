@@ -1,43 +1,47 @@
 #include <iostream>
 #include <time.h>
 
-#include "./Utils/utils.h"
+#include "./Utils/utils.hpp"
 
 using namespace std;
 
 // quick sort algorithm
 // Time complexity: O(n log n)
 
-// choose a pivot element and move all elements smaller than the pivot to the left and all elements greater than the pivot to the right
-void quickSort(int *arr, int n)
+int partition(int arr[], int low, int high, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
 {
-    if (n <= 1)
-    {
-        return;
-    }
+    int pivot = arr[high];
+    int i = (low - 1);
 
-    int pivot = arr[n / 2];
-    int i = 0, j = n - 1;
-    while (i <= j)
+    for (int j = low; j < high; j++)
     {
-        while (arr[i] < pivot)
+
+        if (compare(arr, j, high, &compareProcessor) == -1)
         {
             i++;
-        }
-        while (arr[j] > pivot)
-        {
-            j--;
-        }
-        if (i <= j)
-        {
-            swap(&arr[i], &arr[j]);
-            i++;
-            j--;
+            // swap(arr, swapIndex, swapIndex - 1, &swapProcessor);
+            swap(arr, i, j, &swapProcessor);
         }
     }
+    swap(arr, i + 1, high, &swapProcessor);
+    return (i + 1);
+}
 
-    quickSort(arr, j + 1);
-    quickSort(&arr[i], n - i);
+void quickSortRecursive(int arr[], int low, int high, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+{
+    if (low < high)
+    {
+
+        int pi = partition(arr, low, high, arrayProcessor, swapProcessor, compareProcessor);
+
+        quickSortRecursive(arr, low, pi - 1, arrayProcessor, swapProcessor, compareProcessor);
+        quickSortRecursive(arr, pi + 1, high, arrayProcessor, swapProcessor, compareProcessor);
+    }
+}
+
+void quickSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+{
+    quickSortRecursive(arr, 0, n - 1, arrayProcessor, swapProcessor, compareProcessor);
 }
 
 /*
