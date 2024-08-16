@@ -18,7 +18,7 @@ int main()
 
     while (window.isOpen())
     {
-        visualizer.run(bubleSort);
+        visualizer.run(insertionSort);
         window.display();
 
         sf::sleep(sf::seconds(5));
