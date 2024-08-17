@@ -44,8 +44,7 @@ void recursiveMergeSort(int *arr, int n, int realIndexStart, Visualizer *visuali
 
         for (int i = 0; i < n; i++)
         {
-            arr[i] = temp[i];
-            visualizer->swap(i + realIndexStart, i + realIndexStart);
+            visualizer->set(i + realIndexStart, temp[i]);
         }
 
         delete[] temp;

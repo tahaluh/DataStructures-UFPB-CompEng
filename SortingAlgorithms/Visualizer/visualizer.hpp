@@ -12,17 +12,20 @@ public:
 
     int compare(int a, int b);
     void swap(int a, int b);
+    void set(int index, int value);
+    void read(int index);
 
     void renderArray(int n, sf::Color color);
     void renderCompare(int indexA, int indexB);
     void renderSwap(int indexA, int indexB);
+    void renderSet(int index, int value);
+    void renderRead(int index);
     void renderSortedAnimation();
     bool isSorted();
 
     void tick();
 
     void close();
-    // receive a function that returns a void and receives a int array, a int and a Visualizer
     void run(std::function<void(int *, int, Visualizer *)> sorting);
 
     sf::RenderWindow &getWindow();
@@ -42,8 +45,5 @@ private:
     int n;
     int *arr;
 };
-
-// define a type Sorting that is a function that returns void and receives a int array, a int and a Visualizer
-using Sorting = std::function<void(int *, int, Visualizer *)>;
 
 #endif // VISUALIZER_HPP

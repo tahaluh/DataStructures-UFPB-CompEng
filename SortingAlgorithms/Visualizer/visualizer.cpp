@@ -56,6 +56,24 @@ void Visualizer::renderSwap(int indexA, int indexB)
     this->tick();
 }
 
+void Visualizer::renderSet(int index, int value)
+{
+    this->window.clear();
+    this->renderArray(this->n);
+    this->renderBar(value, index, sf::Color::Blue);
+    this->window.display();
+    this->tick();
+}
+
+void Visualizer::renderRead(int index)
+{
+    this->window.clear();
+    this->renderArray(this->n);
+    this->renderBar(this->arr[index], index, sf::Color::Red);
+    this->window.display();
+    this->tick();
+}
+
 void Visualizer::tick()
 {
     sf::Event event;
@@ -164,4 +182,16 @@ int Visualizer::compare(int a, int b)
         return -1;
     }
     return 0;
+}
+
+void Visualizer::set(int index, int value)
+{
+    arr[index] = value;
+
+    this->renderSet(index, value);
+}
+
+void Visualizer::read(int index)
+{
+    this->renderRead(index);
 }
