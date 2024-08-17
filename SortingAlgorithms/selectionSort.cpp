@@ -1,7 +1,4 @@
-#include <iostream>
-#include <time.h>
-
-#include "./Utils/utils.hpp"
+#include "sorts.hpp"
 
 using namespace std;
 
@@ -9,7 +6,7 @@ using namespace std;
 // Time complexity: O(n^2)
 
 // select the biggest element and move it to the end of the array with just one swap
-void selectionSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+void selectionSort(int *arr, int n, Visualizer *visualizer)
 {
     int maxIndex;
     for (int i = n - 1; i >= 0; i--)
@@ -18,13 +15,12 @@ void selectionSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor
 
         for (int j = i; j >= 0; j--)
         {
-            if (compare(arr, j, maxIndex, &compareProcessor) == 1)
+            if (visualizer->compare(j, maxIndex) == 1)
             {
                 maxIndex = j;
             }
         }
-
-        swap(arr, i, maxIndex, &swapProcessor);
+        visualizer->swap(i, maxIndex);
     }
 }
 

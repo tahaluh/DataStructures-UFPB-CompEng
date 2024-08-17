@@ -4,23 +4,15 @@
 
 using namespace std;
 
-void swap(int *arr, int a, int b, SwapProcessor *swapProcessor = nullptr)
+void swap(int *arr, int a, int b)
 {
-    if (swapProcessor)
-    {
-        (*swapProcessor)(arr, a, b);
-    }
     int temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
 }
 
-int compare(int *arr, int a, int b, CompareProcessor *compareProcessor = nullptr)
+int compare(int *arr, int a, int b)
 {
-    if (compareProcessor)
-    {
-        (*compareProcessor)(arr, a, b);
-    }
     if (arr[a] > arr[b])
     {
         return 1;

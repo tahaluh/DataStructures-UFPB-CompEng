@@ -1,8 +1,3 @@
-#include <iostream>
-#include <time.h>
-#include <functional>
-
-#include "Utils/utils.hpp"
 #include "sorts.hpp"
 
 using namespace std;
@@ -12,15 +7,15 @@ using namespace std;
 
 // move the biggest element to the end of the array in each iteration
 
-void bubbleSort(int *arr, int n, ArrayProcessor arrayProcessor = nullptr, SwapProcessor swapProcessor = nullptr, CompareProcessor compareProcessor = nullptr)
+void bubbleSort(int *arr, int n, Visualizer *visualizer)
 {
     for (int i = 0; i < n - 1; i++)
     {
         for (int j = 0; j < n - i - 1; j++)
         {
-            if ((compare(arr, j, j + 1, &compareProcessor)) == 1)
+            if ((visualizer->compare(j, j + 1)) == 1)
             {
-                swap(arr, j, j + 1, &swapProcessor);
+                visualizer->swap(j, j + 1);
             }
         }
     }

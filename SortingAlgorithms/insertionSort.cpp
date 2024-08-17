@@ -1,7 +1,4 @@
-#include <iostream>
-#include <time.h>
-
-#include "./Utils/utils.hpp"
+#include "sorts.hpp"
 
 using namespace std;
 
@@ -9,16 +6,17 @@ using namespace std;
 // Time complexity: O(n^2)
 
 // always keep the left side of the array sorted
-void insertionSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+void insertionSort(int *arr, int n, Visualizer *visualizer)
 {
     int swapIndex;
     for (int i = 1; i < n; i++)
     {
         swapIndex = i;
         // (compare(arr, j, j + 1, &compareProcessor)) == -1
-        while (swapIndex > 0 && (compare(arr, swapIndex, swapIndex - 1, &compareProcessor)) == -1)
+        while (swapIndex > 0 && (visualizer->compare(swapIndex, swapIndex - 1)) == -1)
         {
-            swap(arr, swapIndex, swapIndex - 1, &swapProcessor);
+            visualizer->compare(swapIndex, swapIndex - 1);
+            visualizer->swap(swapIndex, swapIndex - 1);
             swapIndex--;
         }
     }

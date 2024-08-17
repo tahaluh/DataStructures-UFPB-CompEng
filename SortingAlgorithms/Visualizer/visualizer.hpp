@@ -4,25 +4,26 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <functional>
-#include "../Utils/utils.hpp"
-
-using Sorting = std::function<void(int *, int, ArrayProcessor, SwapProcessor, CompareProcessor)>;
 
 class Visualizer
 {
 public:
-    Visualizer(int width, int height, int fps, const std::string &title, int min, int max, int *arr, int n);
+    Visualizer(int width, int height, int fps, const std::string &title, int *arr, int min, int max, int n);
 
-    void renderArray(int *arr, int n, sf::Color color);
-    void renderCompare(int *arr, int indexA, int indexB);
-    void renderSwap(int *arr, int indexA, int indexB);
-    void renderSortedAnimation(int *arr, int n);
-    bool isSorted(int *arr, int n);
+    int compare(int a, int b);
+    void swap(int a, int b);
+
+    void renderArray(int n, sf::Color color);
+    void renderCompare(int indexA, int indexB);
+    void renderSwap(int indexA, int indexB);
+    void renderSortedAnimation();
+    bool isSorted();
 
     void tick();
 
     void close();
-    void run(Sorting sorting);
+    // receive a function that returns a void and receives a int array, a int and a Visualizer
+    void run(std::function<void(int *, int, Visualizer *)> sorting);
 
     sf::RenderWindow &getWindow();
 
@@ -41,5 +42,8 @@ private:
     int n;
     int *arr;
 };
+
+// define a type Sorting that is a function that returns void and receives a int array, a int and a Visualizer
+using Sorting = std::function<void(int *, int, Visualizer *)>;
 
 #endif // VISUALIZER_HPP

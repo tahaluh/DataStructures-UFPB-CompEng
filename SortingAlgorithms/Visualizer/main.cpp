@@ -54,13 +54,13 @@ int main()
     int width = 1200;
     int height = 900;
 
-    int fps = 500;
+    int fps = 60 * 10;
     int *arr = createArray(n, min, max, seed);
 
     int option = getSort();
     sortOption selectedOption = options[option - 1];
 
-    Visualizer visualizer(width, height, fps, selectedOption.name + " Visualizer", min, max, arr, n);
+    Visualizer visualizer(width, height, fps, selectedOption.name + " Visualizer", arr, min, max, n);
     visualizer.run(selectedOption.sorting);
 
     return EXIT_SUCCESS;

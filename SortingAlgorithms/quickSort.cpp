@@ -1,14 +1,11 @@
-#include <iostream>
-#include <time.h>
-
-#include "./Utils/utils.hpp"
+#include "sorts.hpp"
 
 using namespace std;
 
 // quick sort algorithm
 // Time complexity: O(n log n)
 
-int partition(int arr[], int low, int high, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+int partition(int arr[], int low, int high, Visualizer *visualizer)
 {
     int pivot = arr[high];
     int i = (low - 1);
@@ -16,31 +13,31 @@ int partition(int arr[], int low, int high, ArrayProcessor arrayProcessor, SwapP
     for (int j = low; j < high; j++)
     {
 
-        if (compare(arr, j, high, &compareProcessor) == -1)
+        if (visualizer->compare(j, high) == -1)
         {
             i++;
-            swap(arr, i, j, &swapProcessor);
+            visualizer->swap(i, j);
         }
     }
-    swap(arr, i + 1, high, &swapProcessor);
+    visualizer->swap(i + 1, high);
     return (i + 1);
 }
 
-void quickSortRecursive(int arr[], int low, int high, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+void quickSortRecursive(int arr[], int low, int high, Visualizer *visualizer)
 {
     if (low < high)
     {
 
-        int pi = partition(arr, low, high, arrayProcessor, swapProcessor, compareProcessor);
+        int pi = partition(arr, low, high, visualizer);
 
-        quickSortRecursive(arr, low, pi - 1, arrayProcessor, swapProcessor, compareProcessor);
-        quickSortRecursive(arr, pi + 1, high, arrayProcessor, swapProcessor, compareProcessor);
+        quickSortRecursive(arr, low, pi - 1, visualizer);
+        quickSortRecursive(arr, pi + 1, high, visualizer);
     }
 }
 
-void quickSort(int *arr, int n, ArrayProcessor arrayProcessor, SwapProcessor swapProcessor, CompareProcessor compareProcessor)
+void quickSort(int *arr, int n, Visualizer *visualizer)
 {
-    quickSortRecursive(arr, 0, n - 1, arrayProcessor, swapProcessor, compareProcessor);
+    quickSortRecursive(arr, 0, n - 1, visualizer);
 }
 
 /*
