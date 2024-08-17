@@ -1,7 +1,5 @@
 #include "sorts.hpp"
 
-using namespace std;
-
 // selection sort algorithm
 // Time complexity: O(n^2)
 
@@ -23,22 +21,3 @@ void selectionSort(int *arr, int n, Visualizer *visualizer)
         visualizer->swap(i, maxIndex);
     }
 }
-
-/*
-int main()
-{
-    int n = 100000;
-    int nToPrint = 20;
-    clock_t start, end;
-
-    int *arr = createArray(n, 1, 100, 42);
-    printArray(arr, nToPrint);
-
-    start = clock();
-    selectionSort(arr, n);
-    end = clock();
-
-    printArray(arr, nToPrint);
-    printTimeSpent(start, end);
-}
-*/

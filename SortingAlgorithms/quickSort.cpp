@@ -1,10 +1,9 @@
 #include "sorts.hpp"
 
-using namespace std;
-
 // quick sort algorithm
 // Time complexity: O(n log n)
 
+// partition the array in two parts, the left side with elements smaller than the pivot and the right side with elements bigger than the pivot
 int partition(int arr[], int low, int high, Visualizer *visualizer)
 {
     int pivot = arr[high];
@@ -39,22 +38,3 @@ void quickSort(int *arr, int n, Visualizer *visualizer)
 {
     quickSortRecursive(arr, 0, n - 1, visualizer);
 }
-
-/*
-int main()
-{
-    int n = 10000000;
-    int nToPrint = 20;
-    clock_t start, end;
-
-    int *arr = createArray(n, 1, 100, 42);
-    printArray(arr, nToPrint);
-
-    start = clock();
-    quickSort(arr, n);
-    end = clock();
-
-    printArray(arr, nToPrint);
-    printTimeSpent(start, end);
-}
-*/

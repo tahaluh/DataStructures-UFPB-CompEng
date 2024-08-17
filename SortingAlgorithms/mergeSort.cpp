@@ -1,7 +1,9 @@
 #include "sorts.hpp"
 
-// implementation of void mergeSort(int *arr, int n)
+// merge sort algorithm
+// Time complexity: O(n log n)
 
+// merge two ordered arrays into one recursively
 void recursiveMergeSort(int *arr, int n, int realIndexStart, Visualizer *visualizer)
 {
     if (n > 1)

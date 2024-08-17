@@ -1,11 +1,9 @@
 #include "sorts.hpp"
 
-using namespace std;
-
 // insertion sort algorithm
 // Time complexity: O(n^2)
 
-// always keep the left side of the array sorted
+// always keep the left side of the array sorted inserting the current element in the right position
 void insertionSort(int *arr, int n, Visualizer *visualizer)
 {
     int swapIndex;
@@ -21,22 +19,3 @@ void insertionSort(int *arr, int n, Visualizer *visualizer)
         }
     }
 }
-
-/*
-int main()
-{
-    int n = 100000;
-    int nToPrint = 20;
-    clock_t start, end;
-
-    int *arr = createArray(n, 1, 100, 42);
-    printArray(arr, nToPrint);
-
-    start = clock();
-    insertionSort(arr, n);
-    end = clock();
-
-    printArray(arr, nToPrint);
-    printTimeSpent(start, end);
-}
-*/
