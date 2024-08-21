@@ -9,8 +9,8 @@
         "-fdiagnostics-color=always",
         "-g",
         "${file}",
-        // include utils on the root folder
-        "${workspaceFolder}\\utils\\utils.cpp",
+        // include utils on the folder
+        // "${fileDirname}\\Utils\\utils.cpp",
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe"
       ],
