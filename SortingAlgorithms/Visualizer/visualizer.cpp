@@ -60,7 +60,7 @@ void Visualizer::renderSet(int index, int value)
 {
     this->window.clear();
     this->renderArray(this->n);
-    this->renderBar(value, index, sf::Color::Blue);
+    this->renderBar(value, index, sf::Color::Red);
     this->window.display();
     this->tick();
 }

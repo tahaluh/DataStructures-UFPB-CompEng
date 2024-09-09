@@ -47,14 +47,14 @@ int main()
         {"Quick Sort", quickSort},
         {"Merge Sort", mergeSort}};
 
-    int n = 150;
+    int n = 300;
     int min = 1;
     int max = n;
     int seed = 42;
     int width = 1200;
     int height = 900;
 
-    int fps = 60 * 10;
+    int fps = 50 * 10;
     int *arr = createArray(n, min, max, seed);
 
     int option = getSort();
