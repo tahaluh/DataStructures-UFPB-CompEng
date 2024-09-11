@@ -35,7 +35,7 @@ void printList(DoublyLinkedList *list)
 {
     Node *aux = list->head;
 
-    while (aux->next != NULL)
+    while (aux != NULL)
     {
         cout << aux->data << " ";
         aux = aux->next;
@@ -90,12 +90,13 @@ void push(DoublyLinkedList *list, int data)
     {
         newNode->prev = NULL;
         list->head = newNode;
-        return;
     }
-
-    Node *last = getLast(list->head);
-    last->next = newNode;
-    newNode->prev = last;
+    else
+    {
+        Node *last = getLast(list->head);
+        last->next = newNode;
+        newNode->prev = last;
+    }
 }
 
 // remove the last node of the list
@@ -118,6 +119,25 @@ void pop(DoublyLinkedList *list)
     free(last);
 }
 
+void invertList(DoublyLinkedList *list)
+{
+    Node *current = list->head;
+    Node *temp = NULL;
+
+    while (current != NULL)
+    {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
+    }
+
+    if (temp != NULL)
+    {
+        list->head = temp->prev;
+    }
+}
+
 int main()
 {
     DoublyLinkedList *list = initList();
@@ -131,10 +151,10 @@ int main()
     push(list, 30);
     printList(list);
 
-    pop(list);
+    push(list, 40);
     printList(list);
 
-    shift(list);
+    invertList(list);
     printList(list);
 
     return 0;
